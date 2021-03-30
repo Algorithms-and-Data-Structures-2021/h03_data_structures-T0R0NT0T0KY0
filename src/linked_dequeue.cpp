@@ -6,14 +6,14 @@ namespace itis {
 
 	void LinkedDequeue::Enqueue(Element e) {
 		// TODO: напишите здесь свой код ...
-		DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
 		if (size_ == 0) {
+			DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
 			front_ = doublyNode;
 			back_ = doublyNode;
-			front_->previous=back_;
-			back_->next=front_;
+			front_->previous = back_;
+			back_ ->next = front_;
 		} else {
-			doublyNode->previous=back_;
+			DoublyNode *doublyNode = new DoublyNode(e, nullptr, back_);
 			back_->previous = doublyNode;
 			back_ = doublyNode;
 		}
@@ -22,16 +22,14 @@ namespace itis {
 
 	void LinkedDequeue::EnqueueFront(Element e) {
 		// TODO: напишите здесь свой код ...
-		DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
-
 		if (size_ == 0) {
-
+			DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
 			front_ = doublyNode;
 			back_ = doublyNode;
-			front_->previous=back_;
-			back_->next=front_;
+			front_->previous = back_;
+			back_->next = front_;
 		} else {
-			doublyNode->previous = front_;
+			DoublyNode *doublyNode = new DoublyNode(e, front_, nullptr);
 			front_->next = doublyNode;
 			front_ = doublyNode;
 		}
@@ -43,6 +41,7 @@ namespace itis {
 			throw std::logic_error("cannot not dequeue from empty queue");
 		} else if (size_==1){
 			delete front_;
+			delete back_;
 			front_ = nullptr;
 			back_ = nullptr;
 		} else{
@@ -58,6 +57,7 @@ namespace itis {
 		if (size_ == 0) {
 			throw std::logic_error("cannot not dequeue from empty queue");
 		} else if (size_==1){
+			delete front_;
 			delete back_;
 			front_ = nullptr;
 			back_ = nullptr;
@@ -72,17 +72,11 @@ namespace itis {
 
 	void LinkedDequeue::Clear() {
 		// TODO: напишите здесь свой код ...
-		for (int i = 0; i < size_; ++i) {
-			DoublyNode* doublyNodeToDelete = front_;
-			front_ = front_->previous;
-			delete doublyNodeToDelete;
-			doublyNodeToDelete = nullptr;
+		while (size_>0){
+			Dequeue();
 		}
-		delete front_;
-		delete back_;
-		front_ = nullptr;
-		back_ = nullptr;
-
+		front_= nullptr;
+		back_= nullptr;
 		size_=0;
 	}
 

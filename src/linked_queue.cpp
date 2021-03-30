@@ -10,6 +10,7 @@ void LinkedQueue::Enqueue(Element e) {
     if (size_ == 0){
 		front_ = singlyNode;
 	}
+
     back_ = singlyNode;
     size_++;
 }
