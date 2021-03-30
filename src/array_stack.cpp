@@ -7,36 +7,57 @@
 namespace itis {
 
 ArrayStack::ArrayStack(int capacity) {
-  if (capacity <= 0) {
-    throw std::invalid_argument("initial capacity must be greater than zero");
-  }
+    if (capacity <= 0) {
+      throw std::invalid_argument("initial capacity must be greater than zero");
+    }
+    size_=0;
+    capacity_ = capacity;
+	data_ = new Element[capacity_];
+    std::fill(data_,data_+capacity,Element::UNDEFINED);
 
   // TODO: напишите здесь свой код ...
 }
 
 ArrayStack::~ArrayStack() {
   // TODO: напишите здесь свой код ...
+  delete[] data_;
+  capacity_ = 0;
+  size_ = 0;
+  data_= nullptr;
 }
 
 void ArrayStack::Push(Element e) {
   // TODO: напишите здесь свой код ...
+	if (size_ == capacity_){
+		resize(capacity_+kCapacityGrowthCoefficient);
+	}
+	data_[size_] = e;
+	size_++;
 }
 
 void ArrayStack::Pop() {
   if (size_ == 0) {
     throw std::logic_error("cannot pop out from empty stack");
   }
-
+    data_[size_-1]=Element::UNDEFINED;
+	size_--;
   // TODO: напишите здесь свой код ...
 }
 
 void ArrayStack::Clear() {
   // TODO: напишите здесь свой код ...
+  std::fill(data_, data_+capacity_,Element::UNDEFINED);
+  size_=0;
 }
 
 void ArrayStack::resize(int new_capacity) {
   assert(new_capacity > size_);
-
+	Element* newData = new Element[new_capacity];
+	std::copy(data_,data_+capacity_,newData);
+	std::fill(newData+capacity_,newData+new_capacity, Element::UNDEFINED);
+	capacity_=new_capacity;
+	delete[] data_;
+	data_ = newData;
   // TODO: напишите здесь свой код ...
 }
 
