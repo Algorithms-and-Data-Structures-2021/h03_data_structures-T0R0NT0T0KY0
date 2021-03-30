@@ -10,8 +10,6 @@ namespace itis {
 			DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
 			front_ = doublyNode;
 			back_ = doublyNode;
-			front_->previous = back_;
-			back_ ->next = front_;
 		} else {
 			DoublyNode *doublyNode = new DoublyNode(e, nullptr, back_);
 			back_->previous = doublyNode;
