@@ -7,11 +7,11 @@ namespace itis {
 	void LinkedDequeue::Enqueue(Element e) {
 		// TODO: напишите здесь свой код ...
 		if (size_ == 0) {
-			DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
+			auto* doublyNode = new DoublyNode(e, nullptr, nullptr);
 			front_ = doublyNode;
 			back_ = doublyNode;
 		} else {
-			DoublyNode *doublyNode = new DoublyNode(e, nullptr, back_);
+			auto *doublyNode = new DoublyNode(e, nullptr, back_);
 			back_->previous = doublyNode;
 			back_ = doublyNode;
 		}
@@ -21,13 +21,11 @@ namespace itis {
 	void LinkedDequeue::EnqueueFront(Element e) {
 		// TODO: напишите здесь свой код ...
 		if (size_ == 0) {
-			DoublyNode* doublyNode = new DoublyNode(e, nullptr, nullptr);
+			auto* doublyNode = new DoublyNode(e, nullptr, nullptr);
 			front_ = doublyNode;
 			back_ = doublyNode;
-			front_->previous = back_;
-			back_->next = front_;
 		} else {
-			DoublyNode *doublyNode = new DoublyNode(e, front_, nullptr);
+			auto *doublyNode = new DoublyNode(e, front_, nullptr);
 			front_->next = doublyNode;
 			front_ = doublyNode;
 		}
@@ -38,7 +36,6 @@ namespace itis {
 		if (size_ == 0) {
 			throw std::logic_error("cannot not dequeue from empty queue");
 		} else if (size_==1){
-			delete front_;
 			delete back_;
 			front_ = nullptr;
 			back_ = nullptr;
@@ -55,7 +52,6 @@ namespace itis {
 		if (size_ == 0) {
 			throw std::logic_error("cannot not dequeue from empty queue");
 		} else if (size_==1){
-			delete front_;
 			delete back_;
 			front_ = nullptr;
 			back_ = nullptr;
