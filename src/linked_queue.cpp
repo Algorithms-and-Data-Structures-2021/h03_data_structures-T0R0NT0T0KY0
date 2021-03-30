@@ -35,15 +35,12 @@ void LinkedQueue::Dequeue() {
   // TODO: напишите здесь свой код ...
 }
 
+
 void LinkedQueue::Clear() {
 	// TODO: напишите здесь свой код ...
-    SinglyNode* singlyNode = back_;
-	for (int i = 0; i < size_; ++i) {
-		back_ = back_->next;
-		delete singlyNode;
-		singlyNode = back_;
-	}
-	delete singlyNode;
+    while (size_>0){
+    	Dequeue();
+    }
 	size_=0;
 	back_ = nullptr;
 	front_ = nullptr;
